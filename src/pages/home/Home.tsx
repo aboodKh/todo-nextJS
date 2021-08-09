@@ -6,18 +6,6 @@ import {withTranslation} from "../../i18n";
 import Todo from "../../components/Todo/Todo";
 import {Prisma, Todo as TodoType} from "@prisma/client";
 
-export const getServerSideProps = async () => {
-	const response = await fetch(
-		"http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=SQL2FMGWaJQMRUSJA4Q6B3FTKnXuKFEM&limit=5"
-	);
-	const {data} = await response.json();
-	return {
-		props: {
-			data: data,
-		},
-	};
-};
-
 function Home({t}) {
 	const [todos, setTodos] = useState<TodoType[]>();
 	const [title, setTitle] = useState<string>("");
