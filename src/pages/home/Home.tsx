@@ -63,6 +63,19 @@ function Home({t}) {
 	const descriptionChangeHandler = (ev: any) => {
 		setDescription(ev.target.value);
 	};
+
+	const sortDescending = () => {
+		setTodos(
+			[...todos].sort((t1, t2) => (t1.createdAt > t2.createdAt ? -1 : 1))
+		);
+	};
+
+	const sortAscending = () => {
+		setTodos(
+			[...todos].sort((t1, t2) => (t1.createdAt > t2.createdAt ? 1 : -1))
+		);
+	};
+
 	return (
 		<Container style={{height: "100%"}}>
 			<Head>
@@ -72,7 +85,7 @@ function Home({t}) {
 			<form
 				style={{
 					width: "50%",
-					height: "50%",
+					height: "35%",
 					marginTop: 100,
 				}}
 				onSubmit={createTodo}
@@ -103,12 +116,12 @@ function Home({t}) {
 				</Button>
 			</form>
 
+			<Button onClick={sortDescending}>sort by date Descending</Button>
+			<Button onClick={sortAscending}>sort by date ascending</Button>
 			{todos &&
 				todos.map((todo: TodoType) => {
 					return <Todo key={todo.id} {...todo} getTodos={getTodos} />;
 				})}
-
-			{/* <Todo /> */}
 		</Container>
 	);
 }

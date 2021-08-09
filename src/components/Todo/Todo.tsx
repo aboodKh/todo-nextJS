@@ -28,9 +28,15 @@ const useStyles = makeStyles((theme) => ({
 		borderColor: "Transparent",
 		overflow: "auto",
 	},
+	date: {
+		marginTop: 8,
+		[theme.breakpoints.down("md")]: {
+			display: "none",
+		},
+	},
 }));
 
-const Todo = ({id, title: t, description: d, getTodos}) => {
+const Todo = ({id, title: t, description: d, getTodos, createdAt}) => {
 	const [title, setTitle] = useState<string>(t);
 	const [description, setDescription] = useState<string>(d);
 
@@ -75,6 +81,8 @@ const Todo = ({id, title: t, description: d, getTodos}) => {
 		getTodos();
 	};
 
+	const date = new Date(createdAt).toUTCString();
+
 	return (
 		<Accordion className={classes.root}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -85,9 +93,13 @@ const Todo = ({id, title: t, description: d, getTodos}) => {
 					className={classes.title}
 					readOnly={!edit}
 				/>
+				<div className={classes.date}>{date}</div>
 				<Button onClick={() => setEdit(true)}> edit </Button>
 				<Button onClick={updateTodo}> save </Button>
-				<Button onClick={deleteTodo}> delete </Button>
+				<Button style={{backgroundColor: "red"}} onClick={deleteTodo}>
+					{" "}
+					delete{" "}
+				</Button>
 			</AccordionSummary>
 			<AccordionDetails>
 				{/* <Typography>todo description</Typography> */}
