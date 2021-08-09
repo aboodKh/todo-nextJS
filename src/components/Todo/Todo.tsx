@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		border: 0,
-		width: "30%",
+		width: "25%",
 	},
 	description: {
 		width: "100%",
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	date: {
 		marginTop: 8,
+		marginLeft: 10,
 		[theme.breakpoints.down("md")]: {
 			display: "none",
 		},
@@ -89,22 +90,25 @@ const Todo = ({id, title: t, description: d, getTodos, createdAt}) => {
 				<input
 					value={title}
 					onChange={changeTitle}
-					//	placeholder={title}
 					className={classes.title}
 					readOnly={!edit}
 				/>
 				<div className={classes.date}>{date}</div>
-				<Button onClick={() => setEdit(true)}> edit </Button>
-				<Button onClick={updateTodo}> save </Button>
+				<Button color="primary" onClick={() => setEdit(true)}>
+					{" "}
+					edit{" "}
+				</Button>
+				<Button color="primary" onClick={updateTodo}>
+					{" "}
+					save{" "}
+				</Button>
 				<Button style={{backgroundColor: "red"}} onClick={deleteTodo}>
 					{" "}
 					delete{" "}
 				</Button>
 			</AccordionSummary>
 			<AccordionDetails>
-				{/* <Typography>todo description</Typography> */}
 				<textarea
-					//	placeholder={description}
 					value={description}
 					className={classes.description}
 					readOnly={!edit}
