@@ -3,7 +3,7 @@ import Head from "next/head";
 import styles from "./home.module.scss";
 import {Container} from "@material-ui/core";
 import {withTranslation} from "../../i18n";
-import Todo from "../../components/Todo/Todo"
+import Todo from "../../components/Todo/Todo";
 
 export const getServerSideProps = async () => {
 	const response = await fetch(
@@ -23,7 +23,6 @@ export const getServerSideProps = async () => {
 
 function Home({t}) {
 	return (
-
 		<Container style={{height: "100%"}}>
 			<Head>
 				<title>{t("home:title")} </title>
