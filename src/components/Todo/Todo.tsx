@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Todo = () => {
-	const [title, setTitle] = useState<string>("title");
-	const [description, setDescription] = useState<string>("description");
+const Todo = ({titleProp, descriptionProp}) => {
+	const [title, setTitle] = useState<string>(titleProp);
+	const [description, setDescription] = useState<string>(descriptionProp);
 
 	const [edit, setEdit] = useState<boolean>(false);
 

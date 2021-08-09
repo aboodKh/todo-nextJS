@@ -4,6 +4,7 @@ import styles from "./home.module.scss";
 import {Container} from "@material-ui/core";
 import {withTranslation} from "../../i18n";
 import Todo from "../../components/Todo/Todo";
+import {Prisma, Todo as TodoType} from "@prisma/client";
 
 export const getServerSideProps = async () => {
 	const response = await fetch(
@@ -17,17 +18,37 @@ export const getServerSideProps = async () => {
 	};
 };
 
-/* Home.getInitialProps = async () => ({
-  namespacesRequired: ['home'],
-}) */
-
 function Home({t}) {
+	const [todos, setTodos] = useState<TodoType[]>();
+
+	const getTodos = async () => {
+		try {
+			const response = await fetch("/api/todos");
+			const todos = await response.json();
+			//console.log(todos);
+			setTodos(todos);
+		} catch (err) {
+			console.log("error while getting todos", err);
+		}
+	};
+	useEffect(() => {
+		getTodos();
+	}, []);
+
 	return (
 		<Container style={{height: "100%"}}>
 			<Head>
 				<title>{t("home:title")} </title>
 			</Head>
-			<Todo />
+
+			{todos &&
+				todos.map((todo: TodoType) => {
+					return (
+						<Todo titleProp={todo.title} descriptionProp={todo.description} />
+					);
+				})}
+
+			{/* <Todo /> */}
 		</Container>
 	);
 }
