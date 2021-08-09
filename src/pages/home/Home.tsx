@@ -53,6 +53,7 @@ function Home({t}) {
 			}),
 		});
 		console.log(await response.json());
+		getTodos();
 	};
 
 	const titleChangeHandler = (ev: any) => {
@@ -104,7 +105,7 @@ function Home({t}) {
 
 			{todos &&
 				todos.map((todo: TodoType) => {
-					return <Todo key={todo.id} {...todo} />;
+					return <Todo key={todo.id} {...todo} getTodos={getTodos} />;
 				})}
 
 			{/* <Todo /> */}

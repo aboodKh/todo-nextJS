@@ -21,6 +21,19 @@ export default async function handle(req, res) {
 			},
 		});
 		return res.json(deletedTodo);
+	} else if (req.method == "PUT") {
+		const todo = JSON.parse(req.body);
+		console.log(todo);
+		const updatedTodo = await prisma.todo.update({
+			where: {
+				id: todo.id,
+			},
+			data: {
+				title: todo.title,
+				description: todo.description,
+			},
+		});
+		return res.json(updatedTodo);
 	}
 
 	return res.status(405).json({message: "method not allowed"});

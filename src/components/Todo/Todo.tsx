@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		border: 0,
+		width: "30%",
 	},
 	description: {
 		width: "100%",
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Todo = ({id, title: t, description: d}) => {
+const Todo = ({id, title: t, description: d, getTodos}) => {
 	const [title, setTitle] = useState<string>(t);
 	const [description, setDescription] = useState<string>(d);
 
@@ -56,6 +57,22 @@ const Todo = ({id, title: t, description: d}) => {
 			}),
 		});
 		console.log(await response.json());
+		getTodos();
+	};
+
+	const updateTodo = async () => {
+		const response = await fetch("/api/todos", {
+			method: "PUT",
+			headers: {},
+			body: JSON.stringify({
+				id: id,
+				title: title,
+				description: description,
+			}),
+		});
+		console.log(await response.json());
+		setEdit(false);
+		getTodos();
 	};
 
 	return (
@@ -69,7 +86,7 @@ const Todo = ({id, title: t, description: d}) => {
 					readOnly={!edit}
 				/>
 				<Button onClick={() => setEdit(true)}> edit </Button>
-				<Button onClick={() => {}}> save </Button>
+				<Button onClick={updateTodo}> save </Button>
 				<Button onClick={deleteTodo}> delete </Button>
 			</AccordionSummary>
 			<AccordionDetails>
