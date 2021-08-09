@@ -1,0 +1,32 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+/*   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// my css
+html, body{
+  height: 100%;
+}
+
+#__next{
+  height: 100%;
+}
+
+@font-face{
+  font-family: 'DroidArabicNaskhRegular';
+  fontStyle: 'normal';
+  fontWeight: 'normal';
+  src: url('../../public/fonts/droid_arabic_naskh/DroidNaskh-Regular.ttf') format('trueType'); 
+}
