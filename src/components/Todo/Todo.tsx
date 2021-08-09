@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Todo = ({titleProp, descriptionProp}) => {
-	const [title, setTitle] = useState<string>(titleProp);
-	const [description, setDescription] = useState<string>(descriptionProp);
+const Todo = ({id, title: t, description: d}) => {
+	const [title, setTitle] = useState<string>(t);
+	const [description, setDescription] = useState<string>(d);
 
 	const [edit, setEdit] = useState<boolean>(false);
 
@@ -47,22 +47,36 @@ const Todo = ({titleProp, descriptionProp}) => {
 		setDescription(eve.target.value);
 	};
 
+	const deleteTodo = async () => {
+		const response = await fetch("/api/todos", {
+			method: "DELETE",
+			headers: {},
+			body: JSON.stringify({
+				id: id,
+			}),
+		});
+		console.log(await response.json());
+	};
+
 	return (
 		<Accordion className={classes.root}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 				<input
+					value={title}
 					onChange={changeTitle}
-					placeholder={title}
+					//	placeholder={title}
 					className={classes.title}
 					readOnly={!edit}
 				/>
 				<Button onClick={() => setEdit(true)}> edit </Button>
 				<Button onClick={() => {}}> save </Button>
+				<Button onClick={deleteTodo}> delete </Button>
 			</AccordionSummary>
 			<AccordionDetails>
 				{/* <Typography>todo description</Typography> */}
 				<textarea
-					placeholder={description}
+					//	placeholder={description}
+					value={description}
 					className={classes.description}
 					readOnly={!edit}
 					onChange={changeDescription}

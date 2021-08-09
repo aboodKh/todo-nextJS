@@ -104,13 +104,7 @@ function Home({t}) {
 
 			{todos &&
 				todos.map((todo: TodoType) => {
-					return (
-						<Todo
-							key={todo.id}
-							titleProp={todo.title}
-							descriptionProp={todo.description}
-						/>
-					);
+					return <Todo key={todo.id} {...todo} />;
 				})}
 
 			{/* <Todo /> */}
